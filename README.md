@@ -4,7 +4,7 @@ A simple encryption tool built in Rust. If you need basic symmetric-key encrypti
 
 Provides both a command-line interface and library for encrypting files and data.
 
-Example use case: You have a configuration file containing secrets like API keys, database passwords, crypto seed phrases, etc. You want to securely use these secrets during local development, and be able to deploy them to remote environments. A good way to do this is encrypt your secrets at rest in all environments, and only decrypt them in-memory in your application. This is especially important in today's world, where AI-powered IDEs are constantly sending your code (and potentially secrets) to a remote server.
+Example use case: You have a configuration file containing secrets like API keys, database passwords, crypto seed phrases, etc. You want to securely use these secrets during local development, and be able to deploy them to remote environments. A good way to do this is encrypt your secrets at rest in all environments, and only decrypt them in-memory in your application. This is especially important in today's world, where AI-powered IDEs are constantly sending your code (and potentially plaintext secrets) to a remote server.
 
 ## Installation
 
