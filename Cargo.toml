@@ -13,7 +13,7 @@ categories = ["cryptography", "command-line-utilities"]
 [dependencies]
 anyhow = "1.0"
 aes-gcm = "0.10"
-rand = "0.8"
+rand = "0.9"
 clap = { version = "4.4", features = ["derive"] }
 rpassword = "7.3"
 base64 = "0.21"

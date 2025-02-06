@@ -25,12 +25,12 @@ simple-encrypt = "0.1.0"
 ### Command Line
 Encrypt a file:
 ```bash
-simple-encrypt encrypt config.json config.enc
+simple-encrypt encrypt config.json config.json.enc
 ```
 
 Decrypt a file:
 ```bash
-simple-encrypt decrypt config.enc config.json
+simple-encrypt decrypt config.json.enc config.json
 ```
 
 ### In Your Code

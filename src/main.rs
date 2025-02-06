@@ -48,26 +48,26 @@ enum Commands {
 /// 
 /// # Building
 /// ```bash
-/// cargo build --bin encrypt_decrypt_file
+/// cargo build
 /// ```
 /// 
 /// # Examples
 /// 
 /// ## Generating a new encryption key:
 /// ```bash
-/// cargo run --bin encrypt_decrypt_file generate-key --output my_key.bin
+/// cargo run generate-key --output my_key.bin
 /// ```
 /// This will generate a 32-byte key and save it to 'my_key.bin' in base64 format
 /// 
 /// ## Encrypting a file:
 /// ```bash
-/// cargo run --bin encrypt_decrypt_file encrypt --input secrets.env --output secrets.env.enc
+/// cargo run encrypt --input secrets.env --output secrets.env.enc
 /// ```
 /// You will be prompted to enter the base64-encoded encryption key
 /// 
 /// ## Decrypting a file:
 /// ```bash
-/// cargo run --bin encrypt_decrypt_file decrypt --input secrets.env.enc --output secrets.env.dec
+/// cargo run decrypt --input secrets.env.enc --output secrets.env.dec
 /// ```
 /// Enter the same base64-encoded key used for encryption
 /// 
