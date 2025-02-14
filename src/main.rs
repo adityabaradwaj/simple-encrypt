@@ -116,13 +116,13 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             }
 
             let result = encrypt_bytes(&file_content, &key)?;
-            fs::write(&output, result)?;
+            fs::write(&output, STANDARD.encode(result))?;
 
             println!("Successfully encrypted file from {:?} to {:?}", input, output);
         }
 
         Commands::Decrypt { input, output } => {
-            let file_content = fs::read(&input)?;
+            let file_content = STANDARD.decode(fs::read_to_string(&input)?.trim())?;
             
             // Flush stdout to ensure prompt is displayed
             print!("Enter base64-encoded encryption key: ");
