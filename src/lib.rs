@@ -4,7 +4,7 @@ use aes_gcm::{
 };
 use anyhow::{anyhow, bail, Result};
 use rand::{rngs::OsRng, TryRngCore};
-
+use std::fs;
 
 pub fn encrypt_bytes(plaintext: &[u8], key: &[u8]) -> Result<Vec<u8>> {
     if key.len() != 32 {
@@ -58,6 +58,12 @@ pub fn decrypt_string(encrypted: &[u8], key: &[u8]) -> Result<String> {
     Ok(String::from_utf8(plaintext_bytes)?)
 }
 
+pub fn decrypt_file(filename: &str, password_b64: &str) -> Result<Vec<u8>> {
+    let data = fs::read(filename)?;
+    let key = base64::decode(password_b64)?;
+    decrypt_bytes(&data, &key)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -66,18 +72,18 @@ mod tests {
     fn test() -> Result<()> {
         let mut key = [0u8; 32];
         OsRng.try_fill_bytes(&mut key)?;
-        
+
         let message = "Hello, world!";
         let encrypted = encrypt_string(message, &key).expect("Encryption should succeed");
-        
+
         // Encrypted data should be longer than original due to nonce
         assert!(encrypted.len() > message.len());
         // First 12 bytes should be the nonce
         assert_eq!(encrypted.len(), message.len() + 12 + 16); // +16 for GCM tag
-        
+
         let decrypted = decrypt_string(&encrypted, &key).expect("Decryption should succeed");
         assert_eq!(message, decrypted);
-        
+
         // Test decryption fails with wrong key
         let mut wrong_key = [0u8; 32];
         OsRng.try_fill_bytes(&mut wrong_key)?;
@@ -85,4 +91,3 @@ mod tests {
         Ok(())
     }
 }
-
